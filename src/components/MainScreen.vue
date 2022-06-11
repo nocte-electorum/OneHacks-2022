@@ -50,6 +50,7 @@ export default {
 }
 </script>
 
+
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 /* padding format: top right bottom left */
@@ -108,6 +109,7 @@ li:hover {
 	text-decoration: underline;
 	cursor: pointer;
 }
+
 
 ::-webkit-scrollbar {
 	width: 10px;

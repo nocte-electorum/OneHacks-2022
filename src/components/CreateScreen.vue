@@ -1,14 +1,16 @@
 <template>
 	<div :class="{ shake: disabled }" class="login">  <!-- change this -->
-		<h1>JitGuardian</h1>
+		<h1 class="title">JitGuardian</h1>
 		<img src="../assets/JitGuardian.png" width="64">
-		<h4>User Name:</h4>
+		<h4 class="infoinput">Username:</h4>
 		<input placeholder="Username" id="userinput">
-		<h4 style="margin-top: 25px;">Password:</h4>
+		<h4 style="margin-top: 25px;" class="infoinput">Password:</h4>
 		<input placeholder="Password" type="password" id="passinput">
+		<h4 style="margin-top: 25px;" class="infoinput">Confirm Password:</h4>
+		<input placeholder="Confirm Password" type="password" id="confirmpassinput">
 		<br>
-		<button @click="login(); errorDisabled();">Log In</button>
-		<p id="errortext" class="errortext">Error!  Wrong username or password.</p>
+		<button @click="login(); errorDisabled()">Create Account</button>
+		<p id="errortext" class="errortext">Error!  Passwords do not match</p>
 		<p id="nonetext" class="errortext">Error!  Please enter a username and password.</p>
 		<p id="successtext" class="successtext">Successful login!  Rediriecting...</p>
 	</div>
@@ -24,7 +26,7 @@ export default {
 			disabled: false  // disables false  
 		}
 	},
-	name: "LoginScreen",  // Change this
+	name: "CreateScreen",  // Change this
 	beforeCreate() {
 		document.querySelector('body').setAttribute('style', 'background:#3D3D3D')
 	},
@@ -35,8 +37,10 @@ export default {
 		async login() {
 			let input1 = document.getElementById("userinput");
 			let input2 = document.getElementById("passinput");
+			// let input3 = document.getElementById("confirmpassinput");
 			let t = document.getElementById("errortext");
 			let t2 = document.getElementById("nonetext");
+
 
 			if (input1.value.trim() == "" && input2.value.trim() == "") {
 				t2.setAttribute('style', 'display: block;')
@@ -127,6 +131,15 @@ button {
 button:hover {
 	background-color: #266db4;
 	cursor: pointer;
+}
+.title {
+	margin-top: -40px;
+}
+.infoinput {
+	color: #FFFFFF;
+	font-family: "Source Sans Pro";
+	margin-top: 50px;
+	margin-bottom: 5px;
 }
 .errortext {
 	color: red;
