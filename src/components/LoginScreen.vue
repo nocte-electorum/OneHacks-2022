@@ -134,6 +134,7 @@ button {
 }
 button:hover {
 	background-color: #266db4;
+	cursor: pointer;
 }
 p {
 	color: red;
