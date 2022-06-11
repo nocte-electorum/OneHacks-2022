@@ -5,6 +5,7 @@ pub fn print_hello() {  // dummy function to test client -> server boundary
 
 #[tauri::command]
 pub async fn login(username: String, password: String) -> Result<(), String> {
-	println!("Attemped login with {username} and {password}.");
-	Ok(())
+	Err("Wrong username or password.".to_string())
+	// println!("Attemped login with {username} and {password}.");
+	// Ok(())
 }
