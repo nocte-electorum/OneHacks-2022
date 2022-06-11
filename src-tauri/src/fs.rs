@@ -7,7 +7,7 @@ pub fn get_pass() -> String {
 	cwd = cwd.join("data");
 
 	let key: String = get_key();
-	let file = std::fs::read_to_string(cwd.join("2"));
+	let file = std::fs::read_to_string(cwd.join("1"));
 	if let Ok(s) = file {
 		let res = crate::crypto::decrypt(&s, &key, &key);
 		if let Ok(s) = res { s } else {
@@ -20,6 +20,17 @@ pub fn get_pass() -> String {
 	}
 }
 
+pub fn set_pass(pass: String) -> Result<(), std::io::Error> {
+	let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
+		println!("FATAL: Failed to get current working directory.");
+		std::process::exit(1);
+	});
+	cwd = cwd.join("data");
+
+	std::fs::write(cwd.join("1"), pass.as_bytes())?;
+	todo!()
+}
+
 pub fn get_key() -> String {
 	let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
 		println!("FATAL: Failed to get current working directory.");
@@ -27,7 +38,7 @@ pub fn get_key() -> String {
 	});
 	cwd = cwd.join("data");
 
-	let file = std::fs::read_to_string(cwd.join("1"));
+	let file = std::fs::read_to_string(cwd.join("2"));
 	if let Ok(s) = file {
 		s.trim().into()
 	} else {
