@@ -1,17 +1,21 @@
 <template>
-  <img alt="Vue logo" src="./assets/JitGuardian.png">
-  <h1>JitGuardian</h1>
+  <!-- <img alt="Vue logo" src="./assets/JitGuardian.png">
+  <h1>JitGuardian</h1> -->
+  <LoginScreen/>
 </template>
 
+
 <script>
+import { LoginScreen } from './components/LoginScreen';
+
   export default {
-    data() {
-      return {
-        titleColor: "titleColor"
-      }
-    }
+    name: "JitGuardian",
+	components: {
+		LoginScreen
+	}
   }
 </script>
+
 
 <style>
 #app {
