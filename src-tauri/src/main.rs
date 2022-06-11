@@ -4,6 +4,7 @@
 )]
 mod commands;
 mod fs;
+mod crypto;
 
 fn main() {
 	tauri::Builder::default()
