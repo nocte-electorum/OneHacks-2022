@@ -1,6 +1,19 @@
 # OneHacks II 2022
-#### Team Members: Tahir, Rafi, Shaurya, Fayaaz
+### Team Members
+#### Tahir
+- **GitHub: [Raforawesome](https://github.com/Raforawesome)**
+- **Discord: Raforawesome#6666 (168704403400949761)**
 
+#### Rafi
+- **GitHub: [Ad0pt3d](https://github.com/Ad0pt3d)**
+- **Discord: Ad0pt3d#1887 (272357521480482818)**
+
+#### Shaurya
+- **GitHub: [shawarma-s](https://github.com/shawarma-s)**
+- **Discord: shawarma#6969 (770017815801102367)**
+
+#### Fayaaz
+- **Discord: Fayaaz#5395 (761733878934798359)**
 ---
 
 ## How To Build:
