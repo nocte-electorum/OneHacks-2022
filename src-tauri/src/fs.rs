@@ -27,8 +27,7 @@ pub fn set_pass(pass: String) -> Result<(), std::io::Error> {
 	});
 	cwd = cwd.join("data");
 
-	std::fs::write(cwd.join("1"), pass.as_bytes())?;
-	todo!()
+	std::fs::write(cwd.join("1"), pass.as_bytes())
 }
 
 pub fn get_key() -> String {
