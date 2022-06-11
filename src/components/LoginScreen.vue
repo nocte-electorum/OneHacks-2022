@@ -8,8 +8,9 @@
 		<input placeholder="Password" type="password" id="passinput">
 		<br>
 		<button @click="login">Log In</button>
-		<p id="errortext">Error!  Wrong username or password.</p>
-		<p id="nonetext">Error!  Please enter a username and password.</p>
+		<p id="errortext" class="errortext">Error!  Wrong username or password.</p>
+		<p id="nonetext" class="errortext">Error!  Please enter a username and password.</p>
+		<p id="successtext" class="successtext">Successful login!  Rediriecting...</p>
 	</div>
 </template>
 
@@ -38,21 +39,14 @@ export default {
 			let t2 = document.getElementById("nonetext");
 
 			if (input1.value.trim() == "" && input2.value.trim() == "") {
-				await invoke("login", { username: input1.value, password: input2.value }).then(
-					t2.setAttribute('style', 'display: none;')
-					// code to switch screens here
-				).catch(() => {
-					// let t2 = document.getElementById("nonetext");
-					t2.setAttribute('style', 'display: block;')
-					t.setAttribute('style', 'display: none;')
-					this.errorDisabled()
-				})
+				t2.setAttribute('style', 'display: block;')
+				t.setAttribute('style', 'display: none;')
+				this.errorDisabled()
 			} else {
 				await invoke("login", { username: input1.value, password: input2.value }).then(
 					t.setAttribute('style', 'display: none;')
 					// code to switch screens here
 				).catch(() => {
-					// let t = document.getElementById("errortext");
 					t.setAttribute('style', 'display: block;')
 					t2.setAttribute('style', 'display: none;')
 					this.errorDisabled()
@@ -135,8 +129,12 @@ button {
 button:hover {
 	background-color: #266db4;
 }
-p {
+.errortext {
 	color: red;
+	display: none;
+}
+.successtext {
+	color: green;
 	display: none;
 }
 /* padding format: top right bottom left */
