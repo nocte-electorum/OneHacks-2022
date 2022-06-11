@@ -22,6 +22,12 @@
 
 In the project directory, run:
 ```
+npm install
+```
+to install all the dependencies. It might take a minute.
+
+Then, run:
+```
 npm run tauri:serve
 ```
 and wait for the build process to finish.  It can take several minutes for the first compile, but much less for every subsequent compile.
