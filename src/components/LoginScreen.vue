@@ -128,6 +128,7 @@ button {
 }
 button:hover {
 	background-color: #266db4;
+	cursor: pointer;
 }
 .errortext {
 	color: red;
