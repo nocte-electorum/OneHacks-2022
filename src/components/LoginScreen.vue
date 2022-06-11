@@ -8,6 +8,7 @@
 		<input placeholder="Password" type="password" id="passinput">
 		<br>
 		<button @click="login">Log In</button>
+		<p id="errortext">Error!  Wrong username or password.</p>
 	</div>
 </template>
 
@@ -24,10 +25,17 @@ export default {
 		document.querySelector('body').setAttribute('style', '')
 	},
 	methods: {
-		login() {
+		async login() {
 			let input1 = document.getElementById("userinput");
 			let input2 = document.getElementById("passinput");
-			invoke("login", { username: input1.value, password: input2.value })
+			let t = document.getElementById("errortext");
+			await invoke("login", { username: input1.value, password: input2.value }).then(
+				t.setAttribute('style', 'display: none;')
+				// code to switch screens here
+			).catch(() => {
+				let t = document.getElementById("errortext");
+				t.setAttribute('style', 'display: block;')
+			})
 		}
 	}
 }
@@ -98,6 +106,10 @@ button {
 }
 button:hover {
 	background-color: #266db4;
+}
+p {
+	color: red;
+	display: none;
 }
 /* padding format: top right bottom left */
 </style>
