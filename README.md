@@ -1,24 +1,14 @@
-# onehacks
+# OneHacks II 2022
+#### Team Members: Tahir, Rafi, Shaurya, Fayaaz
 
-## Project setup
-```
-npm install
-```
+---
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## How To Build:
 
-### Compiles and minifies for production
-```
-npm run build
-```
+**Ensure you have Rust and Node.JS installed.**
 
-### Lints and fixes files
+In the project directory, run:
 ```
-npm run lint
+npm run tauri:serve
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+and wait for the build process to finish.  It can take several minutes for the first compile, but much less for every subsequent compile.
