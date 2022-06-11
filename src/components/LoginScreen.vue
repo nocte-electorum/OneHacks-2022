@@ -20,7 +20,7 @@ import { invoke } from "@tauri-apps/api";
 export default {
 	data() {
 		return {
-			disabled: false
+			disabled: false  // disables false  
 		}
 	},
 	name: "LoginScreen",  // Change this

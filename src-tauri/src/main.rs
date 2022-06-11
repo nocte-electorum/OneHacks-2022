@@ -9,6 +9,6 @@ mod crypto;
 fn main() {
 	tauri::Builder::default()
 		.invoke_handler(tauri::generate_handler![commands::login, commands::print_hello])
-    	.run(tauri::generate_context!())
+    	.run(tauri::generate_context!())  // IDEs will show an error but it should be ignored
     	.expect("error while running tauri application");
 }
