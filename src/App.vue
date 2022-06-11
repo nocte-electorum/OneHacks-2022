@@ -6,10 +6,10 @@
 
 
 <script>
-import { LoginScreen } from './components/LoginScreen';
+import LoginScreen from './components/LoginScreen.vue';
 
   export default {
-    name: "JitGuardian",
+    name: "App",
 	components: {
 		LoginScreen
 	}
