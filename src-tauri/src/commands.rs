@@ -43,7 +43,7 @@ pub async fn save_keys() -> Result<(), String> {
 
 #[tauri::command]
 pub fn add_pass(username: String, password: String) -> Result<(), String> {
-	let vault = vault::get_vault();
+	let mut vault = vault::get_vault();
 	vault.add(username, password);
 	Ok(())
 }
