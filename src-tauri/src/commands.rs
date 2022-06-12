@@ -23,8 +23,8 @@ pub async fn register(username: String, password: String) -> Result<(), String> 
 }
 
 #[tauri::command]
-pub fn edit_btn_test() {
-	println!("Test");
+pub fn log(s: String) {
+	println!("{s}");
 }
 
 #[tauri::command]

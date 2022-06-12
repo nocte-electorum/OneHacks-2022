@@ -1,19 +1,42 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/JitGuardian.png">
   <h1>JitGuardian</h1> -->
-  <CreateScreen/>
+  <component :is="currentScreen"/>
 </template>
 
 
 <script>
 import CreateScreen from './components/CreateScreen.vue';
+import { invoke } from '@tauri-apps/api';
+import LoginScreen from './components/LoginScreen.vue';
+import MainScreen from './components/MainScreen.vue';
 
-  export default {
-    name: "App",
-    components: {
-      CreateScreen
-    }
-  }
+let currentScreen = "CreateScreen"
+
+export default {
+	provide: {
+		getScreen: () => { return currentScreen },
+		updateScreen: newscreen => {
+			invoke("log", { s: `Updating screen to ${newscreen}` })
+			currentScreen = newscreen
+		}
+	},
+	data() {
+		return {
+			currentScreen: currentScreen,
+			screens: ["CreateScreen", "LoginScreen", "MainScreen"]
+		}
+	},
+	name: "App",
+	components: {
+		// eslint-disable-next-line vue/no-unused-components
+		CreateScreen,
+		// eslint-disable-next-line vue/no-unused-components
+		LoginScreen,
+		// eslint-disable-next-line vue/no-unused-components
+		MainScreen
+	}
+}
 </script>
 
 

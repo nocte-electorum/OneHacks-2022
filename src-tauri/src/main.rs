@@ -15,7 +15,7 @@ fn main() {
 	tauri::Builder::default()
 		.invoke_handler(tauri::generate_handler![
 			commands::login, 
-			commands::edit_btn_test, 
+			commands::log, 
 			commands::save_keys, 
 			commands::register, 
 		])

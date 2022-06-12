@@ -10,7 +10,7 @@
 		<button @click="login(); errorDisabled();">Log In</button>
 		<p id="errortext" class="errortext">Error!  Wrong username or password.</p>
 		<p id="nonetext" class="errortext">Error!  Please enter a username and password.</p>
-		<p id="successtext" class="successtext">Successful login!  Rediriecting...</p>
+		<p id="successtext" class="successtext">Successful login!  Redirecting...</p>
 	</div>
 </template>
 

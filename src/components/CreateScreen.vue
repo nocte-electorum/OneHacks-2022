@@ -7,9 +7,10 @@
 		<h4 style="margin-top: 25px;" class="infoinput">Password:</h4>
 		<input placeholder="Password" type="password" id="passinput">
 		<br>
+		<p>The current screen is {{ getScreen() }}</p>
 		<button @click="register()">Create Account</button>
 		<p id="nonetext" class="errortext">Error!  Please enter a username and password.</p>
-		<p id="successtext" class="successtext">Successful login!  Rediriecting...</p>
+		<p id="successtext" class="successtext">Successful login!  Redirecting...</p>
 	</div>
 </template>
 
@@ -17,6 +18,7 @@
 import { invoke } from "@tauri-apps/api";
 
 export default {
+	inject: ['getScreen', 'updateScreen'],
     data() {
         return {
             disabled: false,
@@ -42,8 +44,11 @@ export default {
                 t.setAttribute("style", "display: none;");
             }
             else {
-                await invoke("register", { username: input1.value, password: input2.value }).then(
-                ).catch(() => {
+                await invoke("register", { username: input1.value, password: input2.value }).then(() => {
+					invoke("log", { s: this.getScreen() })
+					this.updateScreen("LoginScreen")
+					invoke("log", { s: this.getScreen() })
+                }).catch(() => {
                     t.setAttribute("style", "display: block;");
                     t2.setAttribute("style", "display: none;");
                 });
