@@ -54,7 +54,7 @@ impl Vault {
 		cwd = cwd.join("data");
 
 		let file = std::fs::read_to_string(cwd.join("3"));
-		if let Err(_) = file {
+		if file.is_err() {
 			Self { passwords: HashMap::new() }
 		} else {
 			// let res = Vault::from_keyfile(file);
