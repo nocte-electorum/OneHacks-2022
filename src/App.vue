@@ -1,29 +1,30 @@
 <template>
-  <!-- <img alt="Vue logo" src="./assets/JitGuardian.png">
-  <h1>JitGuardian</h1> -->
   <component :is="currentScreen"/>
 </template>
 
 
 <script>
 import CreateScreen from './components/CreateScreen.vue';
-import { invoke } from '@tauri-apps/api';
+// import { invoke } from '@tauri-apps/api';
 import LoginScreen from './components/LoginScreen.vue';
 import MainScreen from './components/MainScreen.vue';
 
-let currentScreen = "CreateScreen"
+// eslint-disable-next-line no-unused-vars
+// let currentScreen = "CreateScreen"
 
 export default {
-	provide: {
-		getScreen: () => { return currentScreen },
-		updateScreen: newscreen => {
-			invoke("log", { s: `Updating screen to ${newscreen}` })
-			currentScreen = newscreen
+	provide() {
+		return {
+			getScreen: () => { return this.currentScreen },
+			updateScreen: newscreen => {
+				this.currentScreen = newscreen
+			}
 		}
 	},
 	data() {
+		this.currentScreen = "CreateScreen"
 		return {
-			currentScreen: currentScreen,
+			currentScreen: this.currentScreen,
 			screens: ["CreateScreen", "LoginScreen", "MainScreen"]
 		}
 	},
