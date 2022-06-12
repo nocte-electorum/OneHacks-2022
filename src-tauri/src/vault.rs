@@ -1,12 +1,18 @@
 #![allow(unused, dead_code)]
 use std::collections::HashMap;
+use std::f32::consts::E;
+use std::lazy::SyncLazy;
 use std::path::PathBuf;
+use std::sync::{Mutex, MutexGuard};
 
+#[derive(Debug, Clone)]
 pub struct Vault {
 	passwords: HashMap<String, String>
 }
 
-// Constructors
+unsafe impl Sync for Vault {}
+
+// Constructors/Save functions
 impl Vault {
 	pub fn from_keyfile<T: ToString>(raw_path: T) -> Result<Self, VaultError> {
 		let path: PathBuf = PathBuf::from(raw_path.to_string());
@@ -21,6 +27,41 @@ impl Vault {
 
 		Ok( Self { passwords: buffer } )
 	}
+
+	pub fn write_keyfile<T: ToString>(&mut self, raw_path: T) -> Result<(), VaultError> {
+		let path: PathBuf = PathBuf::from(raw_path.to_string());
+		let buffer: String = "".to_string();
+
+		for (name, pass) in self.passwords.iter() {
+			let key: String = crate::fs::get_key();
+			let name_enc: String = crate::crypto::encrypt(name, &key, &key);
+			let pass_enc: String = crate::crypto::encrypt(name, &key, &key);
+		}
+
+		if let Err(e) = std::fs::write(path, buffer.as_bytes()) {
+			return Err(VaultError::new(format!("{e:?}")))
+		}
+		Ok(())
+	}
+
+	pub fn new() -> Self {
+		let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
+			println!("FATAL: Failed to get current working directory.");
+			std::process::exit(1);
+		});
+		cwd = cwd.join("data");
+
+		let file = std::fs::read_to_string(cwd.join("3"));
+		if let Err(_) = file {
+			Self { passwords: HashMap::new() }
+		} else {
+			// let res = Vault::from_keyfile(file);
+			Vault::from_keyfile(file.unwrap()).unwrap_or_else(|_| {
+				println!("An unexpected error occurred!  Were the files corrupted?");  // Theoretically unreachable
+				std::process::exit(1);
+			})
+		}
+	}
 }
 
 // Methods
@@ -32,6 +73,12 @@ impl Vault {
 	pub fn get(&self, name: String) -> Option<String> {
 		self.get(name)
 	}
+}
+
+
+pub fn get_vault() -> MutexGuard<'static, Vault> {
+	static vault: SyncLazy<Mutex<Vault>> = SyncLazy::new(|| Mutex::new(Vault::new()));
+	(*vault).lock().unwrap()
 }
 
 
@@ -57,7 +104,17 @@ impl VaultError {
 }
 
 impl From<std::io::Error> for VaultError {
-    fn from(E: std::io::Error) -> Self {
-		VaultError::new(format!("{E:?}"))
+    fn from(e: std::io::Error) -> Self {
+		VaultError::new(format!("{e:?}"))
+    }
+}
+
+impl From<Result<(), std::io::Error>> for VaultError {
+    fn from(r: Result<(), std::io::Error>) -> Self {
+        if let Err(e) = r {
+			VaultError::new(format!("{e:?}"))
+		} else {
+			VaultError::new("")
+		}
     }
 }
