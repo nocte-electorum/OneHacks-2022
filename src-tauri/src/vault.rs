@@ -7,7 +7,7 @@ use std::sync::{Mutex, MutexGuard};
 
 #[derive(Debug, Clone)]
 pub struct Vault {
-	pub passwords: HashMap<String, String>
+	pub passwords: HashMap<String, (String, String)>
 }
 
 unsafe impl Sync for Vault {}
@@ -17,12 +17,12 @@ impl Vault {
 	pub fn from_keyfile<T: ToString>(raw_path: T) -> Result<Self, VaultError> {
 		let path: PathBuf = PathBuf::from(raw_path.to_string());
 		let file: String = std::fs::read_to_string(&path)?;
-		let mut buffer: HashMap<String, String> = HashMap::new();
+		let mut buffer: HashMap<String, (String, String)> = HashMap::new();
 
 		for line in file.lines() {
 			let split: Vec<&str> = line.split('|').collect();
-			if split.len() != 2 { return Err(VaultError::new("FATAL: Corrupted keyfile!")) }
-			buffer.insert(split[0].into(), split[1].into());
+			if split.len() != 3 { return Err(VaultError::new("FATAL: Corrupted keyfile!")) }
+			buffer.insert(split[0].into(), (split[1].into(), split[2].into()));
 		}
 
 		Ok( Self { passwords: buffer } )
@@ -34,14 +34,14 @@ impl Vault {
 		println!("{:?}", &path);
 		let mut buffer: String = "".to_string();
 
-		for (name, pass) in self.passwords.iter() {
+		for (name, (user, pass)) in self.passwords.iter() {
 			let (key, nonce) = crate::fs::get_key(0_usize);
-			let name_enc_b8: Vec<u8> = crate::crypto::encrypt(name, key.as_bytes());
-			let pass_enc_b8: Vec<u8> = crate::crypto::encrypt(name, key.as_bytes());
+			let name_enc_b8: Vec<u8> = crate::crypto::encrypt(user, key.as_bytes());
+			let pass_enc_b8: Vec<u8> = crate::crypto::encrypt(pass, key.as_bytes());
 			
 			let name_enc: String = crate::crypto::bytes_writable(&name_enc_b8);
 			let pass_enc: String = crate::crypto::bytes_writable(&pass_enc_b8);
-			buffer.push_str(&format!("{name_enc}|{pass_enc}"));
+			buffer.push_str(&format!("{name}|{name_enc}|{pass_enc}"));
 		}
 
 		if let Err(e) = std::fs::write(path, buffer.as_bytes()) {
@@ -72,11 +72,11 @@ impl Vault {
 
 // Methods
 impl Vault {
-	pub fn add(&mut self, name: String, password: String) -> Option<String> {
-		self.passwords.insert(name, password)
+	pub fn add(&mut self, name: String, user: String, password: String) -> Option<(String, String)> {
+		self.passwords.insert(name, (user, password))
 	}
 
-	pub fn get(&self, name: String) -> Option<&String> {
+	pub fn get(&self, name: String) -> Option<&(String, String)> {
 		self.passwords.get(&name)
 	}
 }
