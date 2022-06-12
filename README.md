@@ -2,6 +2,9 @@
 
 ## JitGuardian is a lightweight password manager app for desktop. JitGuardian strives to teach it's users about encryption and cryptography while providing a secure platform for them to safely store all their valuable login information.
 ---
+# Why we chose a password manager
+## Modern password managers are overcomplicated. Our aim is to make a simple, secure, and user friendly password manager that is accessible for everyone. Built from the ground up 🛠️ using Rust🔥, our program guarantees to be blazing fast 🚀, memory safe 🔒, all while providing top of the line security 🏅 with local password and login saves.
+---
 # Team Members: 👦🏾👨🏾👨🏾👦🏾
 #### Tahir Chaudhry
 - **GitHub: [Raforawesome](https://github.com/Raforawesome)**
