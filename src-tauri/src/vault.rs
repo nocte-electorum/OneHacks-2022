@@ -32,12 +32,16 @@ impl Vault {
 		crate::fs::data_init();
 		let path: PathBuf = PathBuf::from(raw_path.to_string());
 		println!("{:?}", &path);
-		let buffer: String = "".to_string();
+		let mut buffer: String = "".to_string();
 
 		for (name, pass) in self.passwords.iter() {
-			let key: String = crate::fs::get_key(0_usize);
-			let name_enc: String = crate::crypto::encrypt(name, &key, &key);
-			let pass_enc: String = crate::crypto::encrypt(name, &key, &key);
+			let (key, nonce) = crate::fs::get_key(0_usize);
+			let name_enc_b8: Vec<u8> = crate::crypto::encrypt(name, key.as_bytes());
+			let pass_enc_b8: Vec<u8> = crate::crypto::encrypt(name, key.as_bytes());
+			
+			let name_enc: String = crate::crypto::bytes_writable(&name_enc_b8);
+			let pass_enc: String = crate::crypto::bytes_writable(&pass_enc_b8);
+			buffer.push_str(&format!("{name_enc}|{pass_enc}"));
 		}
 
 		if let Err(e) = std::fs::write(path, buffer.as_bytes()) {

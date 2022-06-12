@@ -4,7 +4,7 @@ use crate::vault;
 #[tauri::command]
 pub async fn login(username: String, password: String) -> Result<(), String> {
 	let correct_pass: String = crate::fs::get_pass();
-	// println!("Attemped login with {username} and {password}.");
+	// println!("Attempted login with {username} and {password}.");
 	if password == correct_pass {
 		Ok(())
 	} else {
@@ -38,4 +38,17 @@ pub async fn save_keys() -> Result<(), String> {
 	let mut vault = vault::get_vault();
 	let _ = vault.write_keyfile(cwd.join("3").to_str().unwrap());
 	Ok(())
+}
+
+#[tauri::command]
+pub fn add_pass(username: String, password: String) -> Result<(), String> {
+	let vault = vault::get_vault();
+	vault.add(username, password);
+	Ok(())
+}
+
+#[tauri::command]
+pub fn is_registered() -> bool {
+	let res = std::fs::read("./data/2");
+	if res.is_ok() { true } else { false }
 }
