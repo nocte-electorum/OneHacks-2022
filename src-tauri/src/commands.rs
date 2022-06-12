@@ -14,7 +14,6 @@ pub async fn login(username: String, password: String) -> Result<(), String> {
 #[tauri::command]
 pub async fn register(username: String, password: String) -> Result<(), String> {
 	let res = crate::fs::set_pass(password);
-	println!("{res:?}");
 	if res.is_ok() {
 		Ok(())
 	} else {
