@@ -58,5 +58,5 @@ pub fn data_init() {
 		std::process::exit(1);
 	});
 	cwd = cwd.join("data");
-	let _ = std::fs::create_dir(cwd);
+	let _ = std::fs::create_dir_all(cwd);
 }
