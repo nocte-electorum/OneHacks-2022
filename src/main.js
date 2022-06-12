@@ -7,4 +7,5 @@ createApp(App).mount('#app')
 
 appWindow.listen("tauri://close-requested", async () => {
 	await invoke("save_keys")
+	appWindow.close()
 })

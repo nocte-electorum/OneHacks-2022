@@ -1,5 +1,6 @@
 #![allow(unused, dead_code)]
 pub fn get_pass() -> String {
+	data_init();
 	let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
 		println!("FATAL: Failed to get current working directory.");
 		std::process::exit(1);
@@ -21,6 +22,7 @@ pub fn get_pass() -> String {
 }
 
 pub fn set_pass(pass: String) -> Result<(), std::io::Error> {
+	data_init();
 	let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
 		println!("FATAL: Failed to get current working directory.");
 		std::process::exit(1);
@@ -31,6 +33,7 @@ pub fn set_pass(pass: String) -> Result<(), std::io::Error> {
 }
 
 pub fn get_key() -> String {
+	data_init();
 	let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
 		println!("FATAL: Failed to get current working directory.");
 		std::process::exit(1);
@@ -47,4 +50,13 @@ pub fn get_key() -> String {
 		}
 		newkey
 	}
+}
+
+pub fn data_init() {
+	let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
+		println!("FATAL: Failed to get current working directory.");
+		std::process::exit(1);
+	});
+	cwd = cwd.join("data");
+	let _ = std::fs::create_dir(cwd);
 }

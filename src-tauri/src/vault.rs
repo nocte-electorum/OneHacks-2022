@@ -29,7 +29,9 @@ impl Vault {
 	}
 
 	pub fn write_keyfile<T: ToString>(&mut self, raw_path: T) -> Result<(), VaultError> {
+		crate::fs::data_init();
 		let path: PathBuf = PathBuf::from(raw_path.to_string());
+		println!("{:?}", &path);
 		let buffer: String = "".to_string();
 
 		for (name, pass) in self.passwords.iter() {

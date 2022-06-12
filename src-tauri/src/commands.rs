@@ -25,8 +25,13 @@ pub fn edit_btn_test() {
 
 #[tauri::command]
 pub async fn save_keys() -> Result<(), String> {
-	// Call vault save logic here
+	let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
+		println!("FATAL: Failed to get current working directory.");
+		std::process::exit(1);
+	});
+	cwd = cwd.join("data");
+
 	let mut vault = vault::get_vault();
-	vault.write_keyfile("./data/3");
+	vault.write_keyfile(cwd.join("3").to_str().unwrap());
 	Ok(())
 }
