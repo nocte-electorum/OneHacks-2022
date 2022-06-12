@@ -24,3 +24,4 @@ pnpm-debug.log*
 
 # Rust Target
 src/target/debug/
+src-tauri/data/
