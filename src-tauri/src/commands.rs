@@ -1,4 +1,5 @@
 #![allow(unused_variables)]
+use std::collections::HashMap;
 use crate::vault;
 
 #[tauri::command]
@@ -51,4 +52,10 @@ pub fn add_pass(username: String, password: String) -> Result<(), String> {
 pub fn is_registered() -> bool {
 	let res = std::fs::read("./data/2");
 	if res.is_ok() { true } else { false }
+}
+
+#[tauri::command]
+pub fn get_passwords() -> HashMap<String, String> {
+	let vault = vault::get_vault();
+	vault.passwords.clone()
 }
