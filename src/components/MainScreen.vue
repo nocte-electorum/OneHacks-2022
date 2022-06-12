@@ -12,6 +12,11 @@
 	</div>
 
 	<div class="split right">
+		<div class="add">
+			<button class="add-btn">
+				<img src="../assets/Add.png">
+			</button>
+		</div>
 		<div class="centered">
 			<h1>Template Right</h1>
 		</div>
@@ -91,11 +96,9 @@ export default {
 	position: fixed;
 	z-index: 1;
 	top: 0;
-	overflow-y: scroll;
 	overflow-x: hidden;
 	padding-top: 10px;
 }
-
 .left {
 	left: 0;
 	background-color: #3A444F;
@@ -114,19 +117,28 @@ export default {
 	-ms-transform: translateX(-50%);
 	transform: translateX(-50%);
 }
-button {
+.add {
+	margin-top: -10px;
+	background-color: #303030;
+}
+.passwords {
 	background-color: #303030;
 	display: block;
 	align-content: center;
-	border-color: #5e5e5e;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	border-bottom: 1px solid #5e5e5e;
 	padding: 5px;
-	width: 190px;
+	width: 500px;
 	color: #FFFFFF;
 }
-button:hover {
+.passwords:hover {
 	background-color: #1a1a1a;
 }
-
+.add-btn{
+	margin-left: 75%;
+}
 ::-webkit-scrollbar {
 	width: 10px;
 }
