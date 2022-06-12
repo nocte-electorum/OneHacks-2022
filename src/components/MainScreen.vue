@@ -14,11 +14,22 @@
 	<div class="split right">
 		<div class="add">
 			<button class="add-btn">
-				<img src="../assets/Add.png">
+				<img src="../assets/Add.png" width="24">
 			</button>
 		</div>
 		<div class="centered">
-			<h1>Template Right</h1>
+			<div class="add-password">
+				<h4>Label:</h4>
+				<input>
+				<h4>Username:</h4>
+				<input>
+				<h4>Password:</h4>
+				<input type="password"><br>
+				<div class="add-pass-btns">
+					<button class="cancel">Cancel</button>
+					<button class="confirm-add">Add</button>
+				</div>		
+			</div>
 		</div>
 	</div>
 </template>
@@ -31,35 +42,7 @@ import { invoke } from "@tauri-apps/api";
 export default {
     data() {
         return {
-			items: [
-				{ message: "Playstation"}, 
-				{ message: "D2L"},
-				{ message: "Replit"},
-				{ message: "Github"},
-				{ message: "Youtube"},
-				{ message: "Steam"},
-				{ message: "Discord"},
-				{ message: "Figma"},
-				{ message: "Bank"},
-				{ message: "Playstation"}, 
-				{ message: "D2L"},
-				{ message: "Replit"},
-				{ message: "Github"},
-				{ message: "Youtube"},
-				{ message: "Steam"},
-				{ message: "Discord"},
-				{ message: "Figma"},
-				{ message: "Bank"},
-				{ message: "Playstation"}, 
-				{ message: "D2L"},
-				{ message: "Replit"},
-				{ message: "Github"},
-				{ message: "Youtube"},
-				{ message: "Steam"},
-				{ message: "Discord"},
-				{ message: "Figma"},
-				{ message: "Bank"},
-			]
+			passwords: [{}]
 		};
     },
     name: "MainScreen",
@@ -119,7 +102,7 @@ export default {
 }
 .add {
 	margin-top: -10px;
-	background-color: #303030;
+	background-color: #4C5B69;
 }
 .passwords {
 	background-color: #303030;
@@ -131,13 +114,40 @@ export default {
 	border-bottom: 1px solid #5e5e5e;
 	padding: 5px;
 	width: 500px;
+	font-size: 20px;
 	color: #FFFFFF;
 }
 .passwords:hover {
 	background-color: #1a1a1a;
 }
-.add-btn{
-	margin-left: 75%;
+.add-btn {
+	margin-left: 90%;
+	background-color: transparent;
+	border: none;
+}
+.add-btn:hover {
+	margin-left: 90%;
+	background-color: #303030;
+	border: none;
+}
+.add-password {
+	margin-top: 100px;
+}
+.add-pass-btns {
+	margin-top: 10px;
+}
+.confirm-add {
+	border-width: 2px;
+	border-color: #383838;
+	background-color: #464646;
+	padding: 5px;
+	margin-left: 25px;
+}
+.cancel {
+	border-width: 2px;
+	border-color: #383838;
+	background-color: #464646;
+	padding: 5px;
 }
 ::-webkit-scrollbar {
 	width: 10px;
