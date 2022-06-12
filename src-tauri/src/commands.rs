@@ -44,7 +44,7 @@ pub async fn save_keys() -> Result<(), String> {
 #[tauri::command]
 pub fn add_pass(name: String, username: String, password: String) -> Result<(), String> {
 	let mut vault = vault::get_vault();
-	vault.add(username, password);
+	vault.add(name, username, password);
 	Ok(())
 }
 
@@ -55,7 +55,7 @@ pub fn is_registered() -> bool {
 }
 
 #[tauri::command]
-pub fn get_passwords() -> HashMap<String, String> {
+pub fn get_passwords() -> HashMap<String, (String, String)> {
 	let vault = vault::get_vault();
 	vault.passwords.clone()
 }
