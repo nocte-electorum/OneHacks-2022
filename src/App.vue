@@ -1,17 +1,17 @@
 <template>
   <!-- <img alt="Vue logo" src="./assets/JitGuardian.png">
   <h1>JitGuardian</h1> -->
-  <LoginScreen/>
+  <CreateScreen/>
 </template>
 
 
 <script>
-import LoginScreen from './components/LoginScreen.vue';
+import CreateScreen from './components/CreateScreen.vue';
 
   export default {
     name: "App",
 	components: {
-		LoginScreen
+		CreateScreen
 	}
   }
 </script>
