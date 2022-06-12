@@ -20,7 +20,6 @@ export default {
     data() {
         return {
             disabled: false,
-			currentComponent: 'view-main' // disables false  
         };
     },
     name: "CreateScreen",
