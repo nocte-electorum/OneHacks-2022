@@ -7,7 +7,7 @@ pub fn get_pass() -> String {
 	});
 	cwd = cwd.join("data");
 
-	let key: String = get_key();
+	let key: String = get_key(0_usize);
 	let file = std::fs::read_to_string(cwd.join("1"));
 	if let Ok(s) = file {
 		let res = crate::crypto::decrypt(&s, &key, &key);
@@ -29,12 +29,15 @@ pub fn set_pass(pass: String) -> Result<(), std::io::Error> {
 	});
 	cwd = cwd.join("data");
 
-	let key = get_key();
-	let encrypted: String = crate::crypto::encrypt(&pass, &key, &key);
+	let key = get_key(/*pass.len()*/32);
+	let nonce = crate::randstring::rand_nonce();
+	let encrypted: String = crate::crypto::encrypt(&pass, &key, &nonce);
+	let to_write: String = format!("{}\n{}", key, nonce);
+	std::fs::write(cwd.join("1"), to_write.as_bytes());
 	std::fs::write(cwd.join("2"), encrypted.as_bytes())
 }
 
-pub fn get_key() -> String {
+pub fn get_key(len: usize) -> String {
 	data_init();
 	let mut cwd = std::env::current_dir().unwrap_or_else(|_| {
 		println!("FATAL: Failed to get current working directory.");
@@ -46,7 +49,7 @@ pub fn get_key() -> String {
 	if let Ok(s) = file {
 		s.trim().into()
 	} else {
-		let newkey: String = crate::randstring::rand_string(14);
+		let newkey: String = crate::randstring::rand_string(len);
 		if std::fs::write(cwd.join("1"), newkey.as_bytes()).is_err() {
 			println!("ERROR: Failed to write nonce key to file.");
 		}

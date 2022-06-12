@@ -35,7 +35,7 @@ impl Vault {
 		let buffer: String = "".to_string();
 
 		for (name, pass) in self.passwords.iter() {
-			let key: String = crate::fs::get_key();
+			let key: String = crate::fs::get_key(0_usize);
 			let name_enc: String = crate::crypto::encrypt(name, &key, &key);
 			let pass_enc: String = crate::crypto::encrypt(name, &key, &key);
 		}

@@ -11,3 +11,12 @@ pub fn rand_string(len: usize) -> String {
 	}
 	s
 }
+
+pub fn rand_nonce() -> String {
+	let mut rng = rand::thread_rng();
+	let mut s = String::new();
+	for _ in 0..12 {
+		s.push(CHARSET[rand::Rng::gen_range(&mut rng, 0..CHARSET.len())]);
+	}
+	s
+}
