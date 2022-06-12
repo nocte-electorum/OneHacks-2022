@@ -50,5 +50,5 @@ pub fn add_pass(username: String, password: String) -> Result<(), String> {
 #[tauri::command]
 pub fn is_registered() -> bool {
 	let res = std::fs::read("./data/2");
-	if let Ok(_) = res { true } else { false }
+	if res.is_ok() { true } else { false }
 }

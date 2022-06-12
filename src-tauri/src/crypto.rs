@@ -56,7 +56,7 @@ pub fn read_bytes<T: ToString>(raw_path: T) -> Result<Vec<u8>, std::io::Error> {
 	let sbytes: Vec<&str> = raw.split(' ').collect::<Vec<&str>>();
 	let mut bytes: Vec<u8> = Vec::new();
 	for sb in sbytes {
-		if sb.trim() != "" {
+		if !sb.trim().is_empty() {
 			bytes.push(sb.parse::<u8>().unwrap());
 		}
 	}
