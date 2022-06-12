@@ -4,7 +4,7 @@
 		<ul>
 			<li>Google
 				<button class="editbtn"  @click="editScreen">
-				<img src="../../src-tauri/icons/EditBtn.png" width="40">
+				<img src="../assets/EditBtn.png" width="40">
 				</button>
 			</li>
 			<li>D2L</li>
