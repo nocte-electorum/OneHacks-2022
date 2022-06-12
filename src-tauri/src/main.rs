@@ -18,6 +18,9 @@ fn main() {
 			commands::log, 
 			commands::save_keys, 
 			commands::register, 
+			commands::add_pass,
+			commands::is_registered,
+			commands::get_passwords
 		])
     	.run(tauri::generate_context!())  // IDEs will show an error but it should be ignored
     	.expect("error while running tauri application");
