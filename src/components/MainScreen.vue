@@ -2,7 +2,11 @@
 	<div class="split left">
 		<div class="centered">
 		<ul>
-			<li>Google</li>
+			<li>Google
+				<button class="editbtn"  @click="editScreen">
+				<img src="../../src-tauri/icons/EditBtn.png" width="40">
+				</button>
+			</li>
 			<li>D2L</li>
 			<li>Bank</li>
 			<li>Figma</li>
@@ -30,6 +34,12 @@
 		</div>
 	</div>
 
+	<div class="split edit">
+		<div class="centered">
+			
+		</div>
+	</div>
+
 	<div class="split right">
 		<div class="centered">
 			<h1>Template Right</h1>
@@ -39,14 +49,24 @@
 
 
 <script>
+import { invoke } from "@tauri-apps/api";
+
 export default {
-	name: "MainScreen",  // Change this
-	beforeCreate() {
-		document.querySelector('body').setAttribute('style', 'background:#3D3D3D')
-	},
-	beforeUnmount() {
-		document.querySelector('body').setAttribute('style', '')
-	}
+    data() {
+        return {};
+    },
+    name: "MainScreen",
+    beforeCreate() {
+        document.querySelector("body").setAttribute("style", "background:#3D3D3D");
+    },
+    beforeUnmount() {
+        document.querySelector("body").setAttribute("style", "");
+    },
+    methods: {
+        editScreen() {
+            invoke("edit_btn_test");
+        }
+    },
 }
 </script>
 
@@ -82,6 +102,16 @@ export default {
 	right: 0;
 	width: 75%;
 	background-color: #4C5B69;
+}
+
+.edit {
+	margin-top: -11px;
+	margin-left: 50px;
+}
+.editbtn {
+	background-color: transparent;
+	border: none;
+	cursor: pointer;
 }
 
 ul {
