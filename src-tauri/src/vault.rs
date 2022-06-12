@@ -17,7 +17,7 @@ impl Vault {
 	pub fn from_keyfile<T: ToString>(raw_path: T) -> Result<Self, VaultError> {
 		let path: PathBuf = PathBuf::from(raw_path.to_string());
 		let file: String = std::fs::read_to_string(&path)?;
-		let buffer: HashMap<String, String> = HashMap::new();
+		let mut buffer: HashMap<String, String> = HashMap::new();
 
 		for line in file.lines() {
 			let split: Vec<&str> = line.split('|').collect();
@@ -84,7 +84,7 @@ pub fn get_vault() -> MutexGuard<'static, Vault> {
 
 
 #[derive(Clone, Debug)]
-struct VaultError {
+pub struct VaultError {
 	msg: String
 }
 
