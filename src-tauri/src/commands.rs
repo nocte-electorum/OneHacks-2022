@@ -3,9 +3,12 @@ use crate::vault;
 #[tauri::command]
 pub async fn login(username: String, password: String) -> Result<(), String> {
 	let correct_pass: String = crate::fs::get_pass();
-	println!("Attemped login with {username} and {password}.");
-	Err("Wrong username or password.".to_string())
-	// Ok(())
+	// println!("Attemped login with {username} and {password}.");
+	if password == correct_pass {
+		Ok(())
+	} else {
+		Err("Wrong username or password.".to_string())
+	}
 }
 
 #[tauri::command]
