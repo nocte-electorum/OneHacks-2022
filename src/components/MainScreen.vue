@@ -13,21 +13,21 @@
 
 	<div class="split right">
 		<div class="add">
-			<button class="add-btn">
+			<button class="add-btn" @click="add">
 				<img src="../assets/Add.png" width="24">
 			</button>
 		</div>
 		<div class="centered">
-			<div class="add-password">
+			<div class="add-password" id="add-p">
 				<h4>Label:</h4>
-				<input>
+				<input id="label">
 				<h4>Username:</h4>
-				<input>
+				<input id="userin">
 				<h4>Password:</h4>
-				<input type="password"><br>
+				<input id="passin" type="password"><br>
 				<div class="add-pass-btns">
-					<button class="cancel">Cancel</button>
-					<button class="confirm-add">Add</button>
+					<button class="cancel" @click="cancel">Cancel</button>
+					<button class="confirm-add" @click="add_pass">Add</button>
 				</div>		
 			</div>
 		</div>
@@ -42,7 +42,9 @@ import { invoke } from "@tauri-apps/api";
 export default {
     data() {
         return {
-			passwords: [{}]
+			usernames: [{}],
+			passwords: [{}],
+			add_passwords: false
 		};
     },
     name: "MainScreen",
@@ -53,8 +55,31 @@ export default {
         document.querySelector("body").setAttribute("style", "");
     },
     methods: {
-		test() {
-			invoke("log", { s: "edit mode" })
+		add_pass() {
+			let i1 = document.getElementById("label");
+			let i2 = document.getElementById("userin");
+			let i3 = document.getElementById("passin");
+
+			if (i1.value.trim() == "" && i2.value.trim() == "" && i3.value.trim() == "") {
+				invoke("log", { s: "test" })
+			} else {
+				invoke("add_pass", { name: i1, username: i2, password: i3 })
+				// eslint-disable-next-line no-unused-vars
+				let e = invoke("get_passwords")
+				invoke("log", { s: "e"})
+			}
+		},
+		add() {
+			this.add_passwords = true
+			if (this.add_passwords) {
+				document.getElementById("add-p").style.visibility = "visible";
+			}
+		},
+		cancel() {
+			this.add_passwords = false
+			if (!this.add_passwords) {
+				document.getElementById("add-p").style.visibility = "hidden";
+			}
 		}
     },
 }
@@ -132,6 +157,7 @@ export default {
 }
 .add-password {
 	margin-top: 100px;
+	visibility: hidden;
 }
 .add-pass-btns {
 	margin-top: 10px;
