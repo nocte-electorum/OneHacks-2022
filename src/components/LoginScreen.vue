@@ -19,6 +19,7 @@
 import { invoke } from "@tauri-apps/api";
 
 export default {
+	inject: ['getScreen', 'updateScreen'],
 	data() {
 		return {
 			disabled: false  // disables false  
@@ -42,10 +43,10 @@ export default {
 				t2.setAttribute('style', 'display: block;')
 				t.setAttribute('style', 'display: none;')
 			} else {
-				await invoke("login", { username: input1.value, password: input2.value }).then(
+				await invoke("login", { username: input1.value, password: input2.value }).then(() => {
 					t.setAttribute('style', 'display: none;')
-					// code to switch screens here
-				).catch(() => {
+					this.updateScreen("MainScreen")
+				}).catch(() => {
 					t.setAttribute('style', 'display: block;')
 					t2.setAttribute('style', 'display: none;')
 				})

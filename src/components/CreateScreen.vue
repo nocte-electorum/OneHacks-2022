@@ -44,7 +44,7 @@ export default {
             }
             else {
                 await invoke("register", { username: input1.value, password: input2.value }).then(() => {
-					this.updateScreen("LoginScreen")
+                    this.updateScreen("LoginScreen")
                 }).catch(() => {
                     t.setAttribute("style", "display: block;");
                     t2.setAttribute("style", "display: none;");
