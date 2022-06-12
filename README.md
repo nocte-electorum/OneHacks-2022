@@ -1,7 +1,5 @@
-# OneHacks II 2022
+# # Welcome to the JitGuardian Password Manager! 🗝️
 ## Team Members 👦🏾👨🏾👨🏾👦🏾
-#### Tahir
-=======
 ### Team Members
 #### Tahir Chaudhry
 - **GitHub: [Raforawesome](https://github.com/Raforawesome)**
@@ -19,6 +17,7 @@
 - **Email: snt.shaurya@gmail.com**
 
 #### Fayaaz Ahmed
+- **GitHub: [FayaazA](https://github.com/FayaazA)**
 - **Discord: Fayaaz#5395 (761733878934798359)**
 - **Email: fayaaz.ahmed.20@gmail.com**
 ---
