@@ -79,8 +79,8 @@ impl Vault {
 
 
 pub fn get_vault() -> MutexGuard<'static, Vault> {
-	static vault: SyncLazy<Mutex<Vault>> = SyncLazy::new(|| Mutex::new(Vault::new()));
-	(*vault).lock().unwrap()
+	static VAULT: SyncLazy<Mutex<Vault>> = SyncLazy::new(|| Mutex::new(Vault::new()));
+	(*VAULT).lock().unwrap()
 }
 
 

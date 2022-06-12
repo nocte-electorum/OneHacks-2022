@@ -1,3 +1,4 @@
+#![allow(unused_variables)]
 use crate::vault;
 
 #[tauri::command]
@@ -35,6 +36,6 @@ pub async fn save_keys() -> Result<(), String> {
 	cwd = cwd.join("data");
 
 	let mut vault = vault::get_vault();
-	vault.write_keyfile(cwd.join("3").to_str().unwrap());
+	let _ = vault.write_keyfile(cwd.join("3").to_str().unwrap());
 	Ok(())
 }
