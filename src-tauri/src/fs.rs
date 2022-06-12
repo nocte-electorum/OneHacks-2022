@@ -47,7 +47,7 @@ pub fn get_key(len: usize) -> String {
 
 	let file = std::fs::read_to_string(cwd.join("1"));
 	if let Ok(s) = file {
-		s.trim().into()
+		s.lines().collect::<Vec<&str>>()[0].trim().into()
 	} else {
 		let newkey: String = crate::randstring::rand_string(len);
 		if std::fs::write(cwd.join("1"), newkey.as_bytes()).is_err() {
