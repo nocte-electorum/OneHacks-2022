@@ -1,21 +1,21 @@
 # OneHacks II 2022
 ### Team Members
-#### Tahir
+#### Tahir Chaudhry
 - **GitHub: [Raforawesome](https://github.com/Raforawesome)**
 - **Discord: Raforawesome#6666 (168704403400949761)**
 - **Email: raforawesome@raforaweso.me**
 
-#### Rafi
+#### Rafi Miah
 - **GitHub: [Ad0pt3d](https://github.com/Ad0pt3d)**
 - **Discord: Ad0pt3d#1887 (272357521480482818)**
 - **Email: rafimiah2005@gmail.com**
 
-#### Shaurya
+#### Shaurya Santhosh
 - **GitHub: [shawarma-s](https://github.com/shawarma-s)**
 - **Discord: shawarma#6969 (770017815801102367)**
 - **Email: snt.shaurya@gmail.com**
 
-#### Fayaaz
+#### Fayaaz Ahmed
 - **Discord: Fayaaz#5395 (761733878934798359)**
 - **Email: fayaaz.ahmed.20@gmail.com**
 ---
