@@ -1,42 +1,13 @@
+
+
 <template>
 	<div class="split left">
-		<div class="centered">
-		<ul>
-			<li>Google
-				<button class="editbtn"  @click="editScreen">
-				<img src="../assets/EditBtn.png" width="40">
-				</button>
-			</li>
-			<li>D2L</li>
-			<li>Bank</li>
-			<li>Figma</li>
-			<li>Replit</li>
-			<li>Github</li>
-			<li>Jetbrains</li>
-			<li>Steam</li>
-			<li>Firefox</li>
-			<li>Apple</li>
-			<li>Instagram</li>
-			<li>Discord</li>
-			<li>Google</li>
-			<li>D2L</li>
-			<li>Bank</li>
-			<li>Figma</li>
-			<li>Replit</li>
-			<li>Github</li>
-			<li>Jetbrains</li>
-			<li>Steam</li>
-			<li>Firefox</li>
-			<li>Apple</li>
-			<li>Instagram</li>
-			<li>Discord</li>
-		</ul>
-		</div>
-	</div>
-
-	<div class="split edit">
-		<div class="centered">
-			
+		<div class="button-center">
+			<button class="passwords"
+				v-for="item in items"
+				:key="item.id" @click="test">
+				{{ item.message }}
+			</button>
 		</div>
 	</div>
 
@@ -49,11 +20,42 @@
 
 
 <script>
+// eslint-disable-next-line no-unused-vars
 import { invoke } from "@tauri-apps/api";
 
 export default {
     data() {
-        return {};
+        return {
+			items: [
+				{ message: "Playstation"}, 
+				{ message: "D2L"},
+				{ message: "Replit"},
+				{ message: "Github"},
+				{ message: "Youtube"},
+				{ message: "Steam"},
+				{ message: "Discord"},
+				{ message: "Figma"},
+				{ message: "Bank"},
+				{ message: "Playstation"}, 
+				{ message: "D2L"},
+				{ message: "Replit"},
+				{ message: "Github"},
+				{ message: "Youtube"},
+				{ message: "Steam"},
+				{ message: "Discord"},
+				{ message: "Figma"},
+				{ message: "Bank"},
+				{ message: "Playstation"}, 
+				{ message: "D2L"},
+				{ message: "Replit"},
+				{ message: "Github"},
+				{ message: "Youtube"},
+				{ message: "Steam"},
+				{ message: "Discord"},
+				{ message: "Figma"},
+				{ message: "Bank"},
+			]
+		};
     },
     name: "MainScreen",
     beforeCreate() {
@@ -63,9 +65,9 @@ export default {
         document.querySelector("body").setAttribute("style", "");
     },
     methods: {
-        editScreen() {
-            invoke("edit_btn_test");
-        }
+		test() {
+			invoke("log", { s: "edit mode" })
+		}
     },
 }
 </script>
@@ -89,6 +91,7 @@ export default {
 	position: fixed;
 	z-index: 1;
 	top: 0;
+	overflow-y: scroll;
 	overflow-x: hidden;
 	padding-top: 10px;
 }
@@ -103,43 +106,26 @@ export default {
 	width: 75%;
 	background-color: #4C5B69;
 }
-
-.edit {
-	margin-top: -11px;
-	margin-left: 50px;
-}
-.editbtn {
-	background-color: transparent;
-	border: none;
-	cursor: pointer;
-}
-
-ul {
-	list-style-type: none;
-	padding: 0;
+.button-center {
 	margin: 0;
 	margin-top: -10px;
+	position: absolute;
+	left: 50%;
+	-ms-transform: translateX(-50%);
+	transform: translateX(-50%);
 }
-
-li {
-	border: 1px solid #303030;
-	margin-top: -1px;
+button {
+	background-color: #303030;
+	display: block;
+	align-content: center;
+	border-color: #5e5e5e;
+	padding: 5px;
+	width: 190px;
 	color: #FFFFFF;
-	padding: 8px;
-	text-align: left;
 }
-
-li:hover {
-	border: 1px solid #303030;
-	margin-top: -1px;
-	color: #aaaaaa;
-	padding: 8px;
-	text-align: left;
-	font-weight: bold;
-	text-decoration: underline;
-	cursor: pointer;
+button:hover {
+	background-color: #1a1a1a;
 }
-
 
 ::-webkit-scrollbar {
 	width: 10px;
