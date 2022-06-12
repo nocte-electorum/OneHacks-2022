@@ -7,7 +7,7 @@
 		<h4 style="margin-top: 25px;" class="infoinput">Password:</h4>
 		<input placeholder="Password" type="password" id="passinput">
 		<br>
-		<button @click="login(); errorDisabled()">Create Account</button>
+		<button @click="register()">Create Account</button>
 		<p id="nonetext" class="errortext">Error!  Please enter a username and password.</p>
 		<p id="successtext" class="successtext">Successful login!  Rediriecting...</p>
 	</div>
@@ -31,13 +31,11 @@ export default {
         document.querySelector("body").setAttribute("style", "");
     },
     methods: {
-        async login() {
+        async register() {
             let input1 = document.getElementById("userinput");
             let input2 = document.getElementById("passinput");
-            // let input3 = document.getElementById("confirmpassinput");
             let t = document.getElementById("errortext");
             let t2 = document.getElementById("nonetext");
-			let ms = document.getElementById("mainscreen")
 
 
             if (input1.value.trim() == "" && input2.value.trim() == "") {
@@ -45,9 +43,7 @@ export default {
                 t.setAttribute("style", "display: none;");
             }
             else {
-                await invoke("login", { username: input1.value, password: input2.value }).then(
-					t.setAttribute("style", "display: none;"),
-					ms.setAttribute("style", "display: initial")
+                await invoke("register", { username: input1.value, password: input2.value }).then(
                 ).catch(() => {
                     t.setAttribute("style", "display: block;");
                     t2.setAttribute("style", "display: none;");

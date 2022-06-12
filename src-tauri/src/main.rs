@@ -13,7 +13,12 @@ mod vault;
 
 fn main() {
 	tauri::Builder::default()
-		.invoke_handler(tauri::generate_handler![commands::login, commands::edit_btn_test, commands::save_keys, commands::register])
+		.invoke_handler(tauri::generate_handler![
+			commands::login, 
+			commands::edit_btn_test, 
+			commands::save_keys, 
+			commands::register, 
+		])
     	.run(tauri::generate_context!())  // IDEs will show an error but it should be ignored
     	.expect("error while running tauri application");
 }
