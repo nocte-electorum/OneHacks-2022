@@ -2,7 +2,6 @@ use aes_gcm::{ Aes256Gcm, Key, Nonce };
 use aes_gcm::aead::{ Aead, NewAead };
 
 pub fn encrypt(s: &str, key: &str, nonce: &str) -> String {
-	println!("{:?}\n{:?}\n{:?}\n{:?}", s, key, nonce, key.as_bytes());
 	let key = Key::from_slice(key.as_bytes());
 	let cipher = Aes256Gcm::new(key);
 	let nonce = Nonce::from_slice(nonce.as_bytes());
