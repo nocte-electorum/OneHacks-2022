@@ -1,3 +1,5 @@
+use crate::vault;
+
 #[tauri::command]
 pub async fn login(username: String, password: String) -> Result<(), String> {
 	let correct_pass: String = crate::fs::get_pass();
@@ -19,4 +21,12 @@ pub async fn register(username: String, password: String) -> Result<(), String> 
 #[tauri::command]
 pub fn edit_btn_test() {
 	println!("Test");
+}
+
+#[tauri::command]
+pub async fn save_keys() -> Result<(), String> {
+	// Call vault save logic here
+	let mut vault = vault::get_vault();
+	vault.write_keyfile("./data/3");
+	Ok(())
 }
