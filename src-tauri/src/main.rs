@@ -6,6 +6,7 @@ mod commands;
 mod fs;
 mod crypto;
 mod randstring;
+mod vault;
 
 fn main() {
 	tauri::Builder::default()
