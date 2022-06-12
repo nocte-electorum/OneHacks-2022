@@ -5,6 +5,6 @@ import { invoke } from '@tauri-apps/api'
 
 createApp(App).mount('#app')
 
-appWindow.listen("tauri://close-requested", () => {
-	invoke("save_keys")
+appWindow.listen("tauri://close-requested", async () => {
+	await invoke("save_keys")
 })

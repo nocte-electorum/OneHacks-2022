@@ -70,8 +70,8 @@ impl Vault {
 		self.passwords.insert(name, password)
 	}
 
-	pub fn get(&self, name: String) -> Option<String> {
-		self.get(name)
+	pub fn get(&self, name: String) -> Option<&String> {
+		self.passwords.get(&name)
 	}
 }
 
