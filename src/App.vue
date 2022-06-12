@@ -10,9 +10,9 @@ import CreateScreen from './components/CreateScreen.vue';
 
   export default {
     name: "App",
-	components: {
-		CreateScreen
-	}
+    components: {
+      CreateScreen
+    }
   }
 </script>
 

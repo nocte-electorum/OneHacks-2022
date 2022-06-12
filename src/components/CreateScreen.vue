@@ -6,62 +6,61 @@
 		<input placeholder="Username" id="userinput">
 		<h4 style="margin-top: 25px;" class="infoinput">Password:</h4>
 		<input placeholder="Password" type="password" id="passinput">
-		<h4 style="margin-top: 25px;" class="infoinput">Confirm Password:</h4>
-		<input placeholder="Confirm Password" type="password" id="confirmpassinput">
 		<br>
 		<button @click="login(); errorDisabled()">Create Account</button>
-		<p id="errortext" class="errortext">Error!  Passwords do not match</p>
 		<p id="nonetext" class="errortext">Error!  Please enter a username and password.</p>
 		<p id="successtext" class="successtext">Successful login!  Rediriecting...</p>
 	</div>
 </template>
 
-
 <script>
 import { invoke } from "@tauri-apps/api";
 
 export default {
-	data() {
-		return {
-			disabled: false  // disables false  
-		}
-	},
-	name: "CreateScreen",  // Change this
-	beforeCreate() {
-		document.querySelector('body').setAttribute('style', 'background:#3D3D3D')
-	},
-	beforeUnmount() {
-		document.querySelector('body').setAttribute('style', '')
-	},
-	methods: {
-		async login() {
-			let input1 = document.getElementById("userinput");
-			let input2 = document.getElementById("passinput");
-			// let input3 = document.getElementById("confirmpassinput");
-			let t = document.getElementById("errortext");
-			let t2 = document.getElementById("nonetext");
+    data() {
+        return {
+            disabled: false,
+			currentComponent: 'view-main' // disables false  
+        };
+    },
+    name: "CreateScreen",
+    beforeCreate() {
+        document.querySelector("body").setAttribute("style", "background:#3D3D3D");
+    },
+    beforeUnmount() {
+        document.querySelector("body").setAttribute("style", "");
+    },
+    methods: {
+        async login() {
+            let input1 = document.getElementById("userinput");
+            let input2 = document.getElementById("passinput");
+            // let input3 = document.getElementById("confirmpassinput");
+            let t = document.getElementById("errortext");
+            let t2 = document.getElementById("nonetext");
+			let ms = document.getElementById("mainscreen")
 
 
-			if (input1.value.trim() == "" && input2.value.trim() == "") {
-				t2.setAttribute('style', 'display: block;')
-				t.setAttribute('style', 'display: none;')
-			} else {
-				await invoke("login", { username: input1.value, password: input2.value }).then(
-					t.setAttribute('style', 'display: none;')
-					// code to switch screens here
-				).catch(() => {
-					t.setAttribute('style', 'display: block;')
-					t2.setAttribute('style', 'display: none;')
-				})
-			}
-		},
-		errorDisabled() {
-			this.disabled = true
-			setTimeout(() => {
-				this.disabled = false
-			}, 1500)
-		}
-	}
+            if (input1.value.trim() == "" && input2.value.trim() == "") {
+                t2.setAttribute("style", "display: block;");
+                t.setAttribute("style", "display: none;");
+            }
+            else {
+                await invoke("login", { username: input1.value, password: input2.value }).then(
+					t.setAttribute("style", "display: none;"),
+					ms.setAttribute("style", "display: initial")
+                ).catch(() => {
+                    t.setAttribute("style", "display: block;");
+                    t2.setAttribute("style", "display: none;");
+                });
+            }
+        },
+        errorDisabled() {
+            this.disabled = true;
+            setTimeout(() => {
+                this.disabled = false;
+            }, 1500);
+        },
+    },
 }
 </script>
 
