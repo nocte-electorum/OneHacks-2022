@@ -7,7 +7,7 @@ use std::sync::{Mutex, MutexGuard};
 
 #[derive(Debug, Clone)]
 pub struct Vault {
-	passwords: HashMap<String, String>
+	pub passwords: HashMap<String, String>
 }
 
 unsafe impl Sync for Vault {}
