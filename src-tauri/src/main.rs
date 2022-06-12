@@ -7,9 +7,11 @@ mod fs;
 mod crypto;
 mod randstring;
 
+
+
 fn main() {
 	tauri::Builder::default()
-		.invoke_handler(tauri::generate_handler![commands::login])
+		.invoke_handler(tauri::generate_handler![commands::login, commands::edit_btn_test])
     	.run(tauri::generate_context!())  // IDEs will show an error but it should be ignored
     	.expect("error while running tauri application");
 }

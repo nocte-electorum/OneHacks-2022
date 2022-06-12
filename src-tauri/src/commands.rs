@@ -15,3 +15,8 @@ pub async fn register(username: String, password: String) -> Result<(), String> 
 		Err("Failed to write password to disk.".into())
 	}
 }
+
+#[tauri::command]
+pub fn edit_btn_test() {
+	println!("Test");
+}
