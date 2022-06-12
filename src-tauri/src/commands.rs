@@ -15,3 +15,9 @@ pub async fn register(username: String, password: String) -> Result<(), String> 
 		Err("Failed to write password to disk.".into())
 	}
 }
+
+#[tauri::command]
+pub async fn save_keys() -> Result<(), String> {
+	// Call vault save logic here
+	todo!()
+}
