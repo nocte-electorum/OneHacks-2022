@@ -13,12 +13,23 @@
 
 	<div class="split right">
 		<div class="add">
-			<button class="add-btn">
-				<img src="../assets/Add.png">
+			<button class="add-btn" @click="add">
+				<img src="../assets/Add.png" width="24">
 			</button>
 		</div>
 		<div class="centered">
-			<h1>Template Right</h1>
+			<div class="add-password" id="add-p">
+				<h4>Label:</h4>
+				<input id="label">
+				<h4>Username:</h4>
+				<input id="userin">
+				<h4>Password:</h4>
+				<input id="passin" type="password"><br>
+				<div class="add-pass-btns">
+					<button class="cancel" @click="cancel">Cancel</button>
+					<button class="confirm-add" @click="add_pass">Add</button>
+				</div>		
+			</div>
 		</div>
 	</div>
 </template>
@@ -31,35 +42,9 @@ import { invoke } from "@tauri-apps/api";
 export default {
     data() {
         return {
-			items: [
-				{ message: "Playstation"}, 
-				{ message: "D2L"},
-				{ message: "Replit"},
-				{ message: "Github"},
-				{ message: "Youtube"},
-				{ message: "Steam"},
-				{ message: "Discord"},
-				{ message: "Figma"},
-				{ message: "Bank"},
-				{ message: "Playstation"}, 
-				{ message: "D2L"},
-				{ message: "Replit"},
-				{ message: "Github"},
-				{ message: "Youtube"},
-				{ message: "Steam"},
-				{ message: "Discord"},
-				{ message: "Figma"},
-				{ message: "Bank"},
-				{ message: "Playstation"}, 
-				{ message: "D2L"},
-				{ message: "Replit"},
-				{ message: "Github"},
-				{ message: "Youtube"},
-				{ message: "Steam"},
-				{ message: "Discord"},
-				{ message: "Figma"},
-				{ message: "Bank"},
-			]
+			usernames: [{}],
+			passwords: [{}],
+			add_passwords: false
 		};
     },
     name: "MainScreen",
@@ -70,8 +55,31 @@ export default {
         document.querySelector("body").setAttribute("style", "");
     },
     methods: {
-		test() {
-			invoke("log", { s: "edit mode" })
+		add_pass() {
+			let i1 = document.getElementById("label");
+			let i2 = document.getElementById("userin");
+			let i3 = document.getElementById("passin");
+
+			if (i1.value.trim() == "" && i2.value.trim() == "" && i3.value.trim() == "") {
+				invoke("log", { s: "test" })
+			} else {
+				invoke("add_pass", { name: i1, username: i2, password: i3 })
+				// eslint-disable-next-line no-unused-vars
+				let e = invoke("get_passwords")
+				invoke("log", { s: "e"})
+			}
+		},
+		add() {
+			this.add_passwords = true
+			if (this.add_passwords) {
+				document.getElementById("add-p").style.visibility = "visible";
+			}
+		},
+		cancel() {
+			this.add_passwords = false
+			if (!this.add_passwords) {
+				document.getElementById("add-p").style.visibility = "hidden";
+			}
 		}
     },
 }
@@ -119,7 +127,7 @@ export default {
 }
 .add {
 	margin-top: -10px;
-	background-color: #303030;
+	background-color: #4C5B69;
 }
 .passwords {
 	background-color: #303030;
@@ -131,13 +139,41 @@ export default {
 	border-bottom: 1px solid #5e5e5e;
 	padding: 5px;
 	width: 500px;
+	font-size: 20px;
 	color: #FFFFFF;
 }
 .passwords:hover {
 	background-color: #1a1a1a;
 }
-.add-btn{
-	margin-left: 75%;
+.add-btn {
+	margin-left: 90%;
+	background-color: transparent;
+	border: none;
+}
+.add-btn:hover {
+	margin-left: 90%;
+	background-color: #303030;
+	border: none;
+}
+.add-password {
+	margin-top: 100px;
+	visibility: hidden;
+}
+.add-pass-btns {
+	margin-top: 10px;
+}
+.confirm-add {
+	border-width: 2px;
+	border-color: #383838;
+	background-color: #464646;
+	padding: 5px;
+	margin-left: 25px;
+}
+.cancel {
+	border-width: 2px;
+	border-color: #383838;
+	background-color: #464646;
+	padding: 5px;
 }
 ::-webkit-scrollbar {
 	width: 10px;
