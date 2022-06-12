@@ -1,6 +1,8 @@
-# # Welcome to the JitGuardian Password Manager! 🗝️
-## Team Members 👦🏾👨🏾👨🏾👦🏾
-### Team Members
+# Welcome to the JitGuardian Password Manager! 🗝️
+
+## JitGuardian is a lightweight password manager app for desktop. JitGuardian strives to teach it's users about encryption and cryptography while providing a secure platform for them to safely store all their valuable login information.
+---
+# Team Members: 👦🏾👨🏾👨🏾👦🏾
 #### Tahir Chaudhry
 - **GitHub: [Raforawesome](https://github.com/Raforawesome)**
 - **Discord: Raforawesome#6666 (168704403400949761)**
