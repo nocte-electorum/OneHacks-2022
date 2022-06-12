@@ -29,7 +29,9 @@ pub fn set_pass(pass: String) -> Result<(), std::io::Error> {
 	});
 	cwd = cwd.join("data");
 
-	std::fs::write(cwd.join("1"), pass.as_bytes())
+	let key = get_key();
+	let encrypted: String = crate::crypto::encrypt(&pass, &key, &key);
+	std::fs::write(cwd.join("2"), encrypted.as_bytes())
 }
 
 pub fn get_key() -> String {
@@ -40,7 +42,7 @@ pub fn get_key() -> String {
 	});
 	cwd = cwd.join("data");
 
-	let file = std::fs::read_to_string(cwd.join("2"));
+	let file = std::fs::read_to_string(cwd.join("1"));
 	if let Ok(s) = file {
 		s.trim().into()
 	} else {
