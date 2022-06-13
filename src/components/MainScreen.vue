@@ -63,10 +63,11 @@ export default {
 			if (i1.value.trim() == "" && i2.value.trim() == "" && i3.value.trim() == "") {
 				invoke("log", { s: "test" })
 			} else {
-				invoke("add_pass", { name: i1, username: i2, password: i3 })
+				invoke("add_pass", { name: i1.value, username: i2.value, password: i3.value })
 				// eslint-disable-next-line no-unused-vars
-				let e = invoke("get_passwords")
-				invoke("log", { s: "e"})
+				invoke("get_passwords").then(e => {
+					invoke("log", { s: JSON.stringify(e) })
+				})
 			}
 		},
 		add() {

@@ -7,6 +7,7 @@ use std::sync::{Mutex, MutexGuard};
 
 #[derive(Debug, Clone)]
 pub struct Vault {
+	pub longest: usize,
 	pub passwords: HashMap<String, (String, String)>
 }
 
@@ -25,7 +26,7 @@ impl Vault {
 			buffer.insert(split[0].into(), (split[1].into(), split[2].into()));
 		}
 
-		Ok( Self { passwords: buffer } )
+		Ok( Self { passwords: buffer, longest: 0 } )
 	}
 
 	pub fn write_keyfile<T: ToString>(&mut self, raw_path: T) -> Result<(), VaultError> {
@@ -33,15 +34,17 @@ impl Vault {
 		let path: PathBuf = PathBuf::from(raw_path.to_string());
 		println!("{:?}", &path);
 		let mut buffer: String = "".to_string();
-
+		
 		for (name, (user, pass)) in self.passwords.iter() {
-			let (key, nonce) = crate::fs::get_key(0_usize);
+			let (key, nonce) = crate::fs::get_key(self.longest);
+			// println!("Have key {} with a length of {}.", &key, key.len());
 			let name_enc_b8: Vec<u8> = crate::crypto::encrypt(user, key.as_bytes());
 			let pass_enc_b8: Vec<u8> = crate::crypto::encrypt(pass, key.as_bytes());
 			
 			let name_enc: String = crate::crypto::bytes_writable(&name_enc_b8);
 			let pass_enc: String = crate::crypto::bytes_writable(&pass_enc_b8);
 			buffer.push_str(&format!("{name}|{name_enc}|{pass_enc}"));
+			buffer.push('\n');
 		}
 
 		if let Err(e) = std::fs::write(path, buffer.as_bytes()) {
@@ -59,7 +62,7 @@ impl Vault {
 
 		let file = std::fs::read_to_string(cwd.join("3"));
 		if file.is_err() {
-			Self { passwords: HashMap::new() }
+			Self { passwords: HashMap::new(), longest: 0 }
 		} else {
 			// let res = Vault::from_keyfile(file);
 			Vault::from_keyfile(file.unwrap()).unwrap_or_else(|_| {
@@ -73,6 +76,7 @@ impl Vault {
 // Methods
 impl Vault {
 	pub fn add(&mut self, name: String, user: String, password: String) -> Option<(String, String)> {
+		if password.len() > self.longest { self.longest = password.len() }
 		self.passwords.insert(name, (user, password))
 	}
 
