@@ -26,9 +26,11 @@ pub fn decrypt(final_bytes: &[u8], key_bytes: &[u8]) -> String {
 pub fn write_bytes<T: ToString>(raw_path: T, bytes: &[u8]) -> Result<(), std::io::Error> {
 	let mut s: String = String::new();
 
-	for b in bytes {
+	for (i, b) in bytes.iter().enumerate() {
 		s.push_str(&b.to_string());
-		s.push(' ');
+		if i != bytes.len() - 1 {
+			s.push(' ');
+		}
 	}
 
 	std::fs::write(
@@ -41,9 +43,11 @@ pub fn write_bytes<T: ToString>(raw_path: T, bytes: &[u8]) -> Result<(), std::io
 pub fn bytes_writable(bytes: &[u8]) -> String {
 	let mut s: String = String::new();
 
-	for b in bytes {
+	for (i, b) in bytes.iter().enumerate() {
 		s.push_str(&b.to_string());
-		s.push(' ');
+		if i != bytes.len() - 1 {
+			s.push(' ');
+		}
 	}
 
 	s
