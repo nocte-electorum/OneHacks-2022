@@ -1,13 +1,12 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-vars */
 <template>
 	<div class="split left">
 		<div class="button-center">
-			<button class="passwords"
-				v-for="label in labels"
-				:key="label.id" @click="test">
-				{{ label }}
-			</button>
+			<!-- <button class="passwords"
+				v-for="cred in credentials.credentials"
+				:key="cred.id" @click="test">
+				{{ cred }}
+			</button> -->
 		</div>
 	</div>
 
@@ -39,13 +38,67 @@
 // eslint-disable-next-line no-unused-vars
 import { invoke } from "@tauri-apps/api";
 
+// eslint-disable-next-line no-unused-vars
+class Credential {
+	label
+	user
+	pass
+
+	set(label = null, user = null, pass = null) {
+		if (label != null) {
+			this.label = label
+		}
+		if (user != null) {
+			this.user = user
+		}
+		if (pass != null) {
+			this.pass = pass
+		}
+	}
+
+	get_label() { return this.label }
+	get_user() { return this.user }
+	get_pass() { return this.pass }
+
+	constructor() {
+		this.labels = []
+		this.usernames = []
+		this.passwords = []
+	}
+}
+
+// eslint-disable-next-line no-unused-vars
+class CredentialManager {
+	credentials
+	
+	get_from_index(idx) {
+		let cred = this.credentials[idx]
+		return [cred.get_label(), cred.get_user(), cred.get_pass()]
+	}
+
+	get_index(label) {
+		let i = 0;
+		this.credentials.forEach(cred => {
+			if (cred.get_label() == label) {
+				return i
+			}
+			i++
+		})
+		return null
+	}
+
+	add(cred) { this.credentials.push(cred) }
+
+	constructor() {
+		this.credentials = []
+	}
+}
+
+
 export default {
     data() {
         return {
-			labels: [],
-			usernames: [],
-			passwords: [],
-			add_passwords: false
+			credentials: CredentialManager()
 		};
     },
     name: "MainScreen",
@@ -71,7 +124,10 @@ export default {
 						let user = info[0]
 						// eslint-disable-next-line no-unused-vars
 						let pass = info[1]
-						this.labels.push(label)
+
+						let cred = Credential()
+						cred.set(label, user, pass)
+						this.credentials.add(cred)
 						// invoke("log", { s: this.label })
 					}
 				})
