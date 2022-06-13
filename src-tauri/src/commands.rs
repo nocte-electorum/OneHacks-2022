@@ -55,7 +55,7 @@ pub fn is_registered() -> bool {
 }
 
 #[tauri::command]
-pub fn get_passwords() -> HashMap<String, [String; 2]> {
+pub fn get_passwords() -> Result<HashMap<String, [String; 2]>, String> {
 	let vault = vault::get_vault();
 	let mut new_vault: HashMap<String, [String; 2]> = HashMap::new();
 
@@ -64,5 +64,5 @@ pub fn get_passwords() -> HashMap<String, [String; 2]> {
 		new_vault.insert(name.clone(), arr);
 	}
 	// vault.passwords.clone()
-	new_vault
+	Ok(new_vault)
 }
