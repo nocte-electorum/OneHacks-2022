@@ -26,6 +26,16 @@ Modern password managers are overcomplicated. Our aim is to make a simple, secur
 - **Discord: Fayaaz#5395 (761733878934798359)**
 - **Email: fayaaz.ahmed.20@gmail.com**
 
+## Project Structure Breakdown
+### src-tauri/
+This directory contains the entire backend (Rust part) of the project.  This includes filesystem abstractions, the cryptography and encryption modules, the vault manager, etc.
+
+### docs/
+This directory contains the source for the website located at [our website](https://jitguardian.tech).
+
+### src/
+This directory contains the entire source for the Vue.JS frontend.
+
 ## How To Build:
 
 **Ensure you have Rust and Node.JS installed.**
