@@ -65,13 +65,14 @@ export default {
 				invoke("log", { s: "test" })
 			} else {
 				invoke("add_pass", { name: i1.value, username: i2.value, password: i3.value })
+				this.labels.push(i1.value)
 				invoke("get_passwords").then(e => {
+					// eslint-disable-next-line no-unused-vars
 					for (const [label, info] of Object.entries(e)) {
 						// eslint-disable-next-line no-unused-vars
 						let user = info[0]
 						// eslint-disable-next-line no-unused-vars
 						let pass = info[1]
-						this.labels.push(label)
 						// invoke("log", { s: this.label })
 					}
 				})
