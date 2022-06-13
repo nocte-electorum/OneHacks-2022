@@ -1,12 +1,12 @@
-
-
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-unused-vars */
 <template>
 	<div class="split left">
 		<div class="button-center">
 			<button class="passwords"
-				v-for="item in items"
-				:key="item.id" @click="test">
-				{{ item.message }}
+				v-for="label in labels"
+				:key="label.id" @click="test">
+				{{ label }}
 			</button>
 		</div>
 	</div>
@@ -42,8 +42,9 @@ import { invoke } from "@tauri-apps/api";
 export default {
     data() {
         return {
-			usernames: [{}],
-			passwords: [{}],
+			labels: [],
+			usernames: [],
+			passwords: [],
 			add_passwords: false
 		};
     },
@@ -64,9 +65,15 @@ export default {
 				invoke("log", { s: "test" })
 			} else {
 				invoke("add_pass", { name: i1.value, username: i2.value, password: i3.value })
-				// eslint-disable-next-line no-unused-vars
 				invoke("get_passwords").then(e => {
-					invoke("log", { s: JSON.stringify(e) })
+					for (const [label, info] of Object.entries(e)) {
+						// eslint-disable-next-line no-unused-vars
+						let user = info[0]
+						// eslint-disable-next-line no-unused-vars
+						let pass = info[1]
+						this.labels.push(label)
+						// invoke("log", { s: this.label })
+					}
 				})
 			}
 		},
