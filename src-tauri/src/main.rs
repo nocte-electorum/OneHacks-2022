@@ -1,4 +1,4 @@
-#![feature(once_cell)]
+#![feature(once_cell, let_chains)]
 #![cfg_attr(
   all(not(debug_assertions), target_os = "windows"),
   windows_subsystem = "windows"
