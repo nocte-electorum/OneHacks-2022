@@ -20,7 +20,7 @@ Modern password managers are overcomplicated. Our aim is to make a simple, secur
 
 #### Shaurya Santhosh
 - **GitHub: [shawarma-s](https://github.com/shawarma-s)**
-- **Discord: shawarma#6969 (770017815801102367)**
+- **Discord: shawarma1130**
 - **Email: snt.shaurya@gmail.com**
 
 #### Fayaaz Ahmed
